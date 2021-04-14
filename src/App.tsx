@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { ThemeProvider } from 'styled-components'
 import Modal from 'react-modal'
+import { ThemeProvider } from 'styled-components'
 import { createServer } from 'miragejs'
 import { Dashboard } from './components/Dashboard';
 import { Header } from './components/Header';
 import { GlobalStyles } from './styles/global';
 import theme from './styles/theme';
-
+import { NewTransactionModal } from './components/NewTransactionModal';
 
 createServer({
   routes(){
@@ -44,12 +44,10 @@ export function App() {
     <ThemeProvider theme={theme}>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
       <Dashboard />
-      <Modal
+      <NewTransactionModal 
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
-      >
-        <h2>Cadastrar</h2>
-      </Modal>
+      />
       <GlobalStyles/>
     </ThemeProvider>
   );
