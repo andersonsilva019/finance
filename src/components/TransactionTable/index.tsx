@@ -43,6 +43,7 @@ export function TransactionTable(){
                 key={transaction.id}
                 title={transaction.title}
                 value={transaction.value}
+                type={transaction.type}
                 category={transaction.category}
                 date={newDate.toString()}
               />
