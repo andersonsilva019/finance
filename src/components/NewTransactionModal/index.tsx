@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Modal from 'react-modal'
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
+import { callApi } from '../../services/api'
 import * as S from './styles'
 
 type NewTransactionModalProps = {
@@ -10,9 +11,42 @@ type NewTransactionModalProps = {
   onRequestClose: () => void
 }
 
+type TransactionData = {
+  title: string
+  category: string
+}
+
 export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModalProps){
 
   const [type, setType] = useState('deposit')
+
+  const [transactionData, setTransactionData] = useState<TransactionData>({
+   title: '',
+   category: ''
+  })
+
+  const [value, setValue] = useState(0)
+
+  const changeTransactionData = (key: keyof typeof transactionData) => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => setTransactionData({ ...transactionData, [key]: e.target.value })
+
+  const handleCreateNewTransaction = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault()
+
+      const data = {
+        title: transactionData.title,
+        value,
+        category: transactionData.category,
+        type,
+        createdAt: new Date()
+      }
+      await callApi.NewTransaction(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
   return (
     <Modal
@@ -25,17 +59,21 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
         <img src={closeImg} alt="Fechar modal"/>
       </S.ButtonClose>
 
-      <S.Container>
+      <S.Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar transação</h2>
 
         <input 
           type="text" 
           placeholder="Título"
+          value={transactionData.title}
+          onChange={changeTransactionData('title')}
         />
         
         <input 
           type="number" 
           placeholder="Valor"
+          value={value}
+          onChange={event => setValue(Number(event.target.value))}
         />
 
         <S.TransactionTypeContainer>
@@ -62,6 +100,8 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
         <input 
           type="text" 
           placeholder="Categoria"
+          value={transactionData.category}
+          onChange={changeTransactionData('category')}
         />
 
         <button type="submit">Cadastrar</button>

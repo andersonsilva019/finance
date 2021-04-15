@@ -5,6 +5,7 @@ import * as S from './styles'
 
 export type Transaction = {
   id: number
+  type: string
   title: string
   value: number
   category: string
