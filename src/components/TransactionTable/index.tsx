@@ -19,7 +19,6 @@ export function TransactionTable(){
         </thead>
         <tbody>
           {transactions.map(transaction => {
-            const newDate = transaction.createdAt
             return (
               <TransactionRow 
                 key={transaction.id}
@@ -27,7 +26,7 @@ export function TransactionTable(){
                 value={transaction.value}
                 type={transaction.type}
                 category={transaction.category}
-                date={newDate.toString()}
+                date={transaction.createdAt}
               />
             )
           })}

@@ -7,7 +7,7 @@ export type Transaction = {
   title: string
   value: number
   category: string
-  createdAt: Date;
+  createdAt: string;
 }
 
 type TransactionProviderProps = {
@@ -33,7 +33,8 @@ export function TransactionProvider({children}: TransactionProviderProps){
   },[])
 
   const createTransaction = async (transaction: Omit<Transaction, "id" | "createdAt">) => {
-    await api.newTransaction(transaction)
+    const transactionsResponse = await api.newTransaction(transaction)
+    setTransactions([...transactions, transactionsResponse])
   }
 
   return (

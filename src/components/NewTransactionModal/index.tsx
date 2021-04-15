@@ -43,6 +43,11 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
         value
       })
 
+      onRequestClose()
+
+      setType('deposit')
+      setValue(0)
+
     } catch (error) {
       console.log(error.message)
     }

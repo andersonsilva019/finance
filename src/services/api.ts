@@ -12,6 +12,11 @@ export const api = {
     return response.data.transactions
   },
   async newTransaction(data: Omit<Transaction, 'id' | 'createdAt'>){
-    await apiUrl.post('api/transactions', data)
+    const response = await apiUrl.post<{transaction:Transaction}>('api/transactions', {
+      ...data,
+      createdAt: new Date()
+    })
+    const { transaction } = response.data
+    return transaction
   }
 }
