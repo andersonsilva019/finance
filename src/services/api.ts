@@ -1,18 +1,17 @@
 import axios from 'axios'
-import { Transaction } from '../providers/Transaction'
+import { Transaction } from '../hooks/useTransactions'
 
 const apiUrl = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000/api',
 })
-
 
 export const api = {
   async getAllTransactions(){
-    const response = await apiUrl.get('api/transactions')
+    const response = await apiUrl.get('transactions')
     return response.data.transactions
   },
   async newTransaction(data: Omit<Transaction, 'id' | 'createdAt'>){
-    const response = await apiUrl.post<{transaction:Transaction}>('api/transactions', {
+    const response = await apiUrl.post<{transaction:Transaction}>('transactions', {
       ...data,
       createdAt: new Date()
     })
