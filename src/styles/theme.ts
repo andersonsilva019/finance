@@ -8,5 +8,6 @@ export default {
     title: '#363F5F',
     text: '#969CB3',
     background: '#F0F2F5',
+    inputBackground: '#e7e9ee'
   },
 } as const;

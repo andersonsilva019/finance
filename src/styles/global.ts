@@ -9,8 +9,8 @@ export const GlobalStyles = createGlobalStyle`
     }
     body {
       background: ${theme.colors.background}; 
-      text-rendering: optimizeLegibility !important;
-      -webkit-font-smoothing: antialiased !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
     body, input, button, textarea {
@@ -37,6 +37,31 @@ export const GlobalStyles = createGlobalStyle`
     [disabled]{
       opacity: 0.6;
       cursor: not-allowed;
+    }
+
+    .react-modal-overlay {
+      background:rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+
+    }
+
+    .react-modal-content {
+      width: 100%;
+      max-width: 576px;
+      background: ${theme.colors.background};
+      padding: 3rem;
+      position: relative;
+      border-radius: 0.25rem;
     }
   `}
 `
