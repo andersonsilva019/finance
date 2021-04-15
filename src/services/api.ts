@@ -1,19 +1,17 @@
 import axios from 'axios'
-import { Transaction } from '../components/TransactionTable'
+import { Transaction } from '../providers/Transaction'
 
-type NewTransaction = Omit<Transaction, 'id'>;
-
-const api = axios.create({
+const apiUrl = axios.create({
   baseURL: 'http://localhost:3000',
 })
 
 
-export const callApi = {
+export const api = {
   async getAllTransactions(){
-    const response = await api.get('api/transactions')
+    const response = await apiUrl.get('api/transactions')
     return response.data.transactions
   },
-  async NewTransaction(data: NewTransaction){
-    await api.post('api/transactions', data)
+  async newTransaction(data: Omit<Transaction, 'id' | 'createdAt'>){
+    await apiUrl.post('api/transactions', data)
   }
 }

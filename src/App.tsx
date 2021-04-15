@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { GlobalStyles } from './styles/global';
 import theme from './styles/theme';
 import { NewTransactionModal } from './components/NewTransactionModal';
+import { TransactionProvider } from './providers/Transaction';
 
 createServer({
 
@@ -67,13 +68,15 @@ export function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
-      <Dashboard />
-      <NewTransactionModal 
-        isOpen={isNewTransactionModalOpen}
-        onRequestClose={handleCloseNewTransactionModal}
-      />
-      <GlobalStyles/>
+      <TransactionProvider>
+        <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
+        <Dashboard />
+        <NewTransactionModal 
+          isOpen={isNewTransactionModalOpen}
+          onRequestClose={handleCloseNewTransactionModal}
+        />
+        <GlobalStyles/>
+      </TransactionProvider>
     </ThemeProvider>
   );
 }

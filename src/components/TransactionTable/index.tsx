@@ -1,29 +1,11 @@
-import { useEffect, useState } from 'react'
-import { callApi } from '../../services/api'
+import { useContext } from 'react'
+import { TransactionContext } from '../../providers/Transaction'
 import { TransactionRow } from '../TransactionRow'
 import * as S from './styles'
 
-export type Transaction = {
-  id: number
-  type: string
-  title: string
-  value: number
-  category: string
-  createdAt: Date;
-}
 
 export function TransactionTable(){
-
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-
-  useEffect(() => {
-    const getAllTransactions = async () => {
-      const data = await callApi.getAllTransactions()
-      setTransactions(data)
-    }
-    getAllTransactions()
-  },[])
-
+  const {transactions} = useContext(TransactionContext)
   return(
     <S.Container>
       <table>

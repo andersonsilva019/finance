@@ -1,12 +1,15 @@
+import { useContext } from 'react'
 import { useTheme } from 'styled-components'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import totalImg from '../../assets/total.svg'
+import { TransactionContext } from '../../providers/Transaction'
 import * as S from './styles'
 
 export function Summary(){
-
   const theme = useTheme()
+
+  const { transactions } = useContext(TransactionContext)
 
   return(
     <S.Container>
