@@ -1,6 +1,6 @@
 <h4 align="center" style="background: #5429CC; padding: 20px; color: #FFF">
     <img  
-    width=400 alt="netflix" src="https://res.cloudinary.com/drsxhihfr/image/upload/v1618532014/images/logo_imtto9.svg" 
+    width=500 alt="dtmoney" src="https://res.cloudinary.com/drsxhihfr/image/upload/v1618617466/images/loo_mif0pk.png" 
     />
     <br>
     <br>
